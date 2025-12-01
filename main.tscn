@@ -1,0 +1,83 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4rwv482yf4ww"]
+
+[ext_resource type="Script" uid="uid://c6krbqaadugbr" path="res://main.gd" id="1_ig7tw"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ig7tw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Advent of Code 2025 in Godot"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="DaySelector" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Load Day"
+
+[node name="PartOne" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Run Part One"
+
+[node name="PartTwo" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Run Part Two"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DayLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+text = "No Day Selected"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PartOneResult" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+text = "No Day Selected"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PartTwoResult" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+text = "No Day Selected"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DayContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DayLoader" type="PopupMenu" parent="."]
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/DaySelector" to="." method="_on_DaySelector_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PartOne" to="." method="_on_PartOne_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PartTwo" to="." method="_on_PartTwo_pressed"]
+[connection signal="id_pressed" from="DayLoader" to="." method="_on_DayLoader_id_pressed"]
