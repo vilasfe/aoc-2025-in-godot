@@ -16,4 +16,5 @@ func test_calc_part_one() -> void:
 	var runner = scene_runner("res://src/2025/01/SecretEntrance.tscn")
 	var data = runner.invoke("input", "example")
 	var result = runner.invoke("calc_part_one", data)
-	assert_that(result).is_equal(3)
+	assert_that(result.get("zero_count")).is_equal(3)
+	assert_that(result.get("zero_cross")).is_equal(6)
