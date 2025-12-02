@@ -2,5 +2,8 @@
 .godot/
 /android/
 
+# gdUnit4 reports
+reports/
+
 # ignore AOC inputs
 input.txt
