@@ -55,21 +55,25 @@ text = "No Day Selected"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PartOneResult" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="PartOneResult" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
+focus_mode = 2
 text = "No Day Selected"
 horizontal_alignment = 1
 vertical_alignment = 1
+selection_enabled = true
 
-[node name="PartTwoResult" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="PartTwoResult" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
+focus_mode = 2
 text = "No Day Selected"
 horizontal_alignment = 1
 vertical_alignment = 1
+selection_enabled = true
 
 [node name="DayContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
