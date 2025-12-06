@@ -37,7 +37,8 @@ func _on_DayLoader_id_pressed(id:int):
 
 # TODO: Change this from preload to autodiscovery
 var scenes = [
-	preload("res://src/2025/01/SecretEntrance.tscn")
+	preload("res://src/2025/01/SecretEntrance.tscn"),
+	preload("res://src/2025/02/GiftShop.tscn")
 	]
 
 func _on_PartOne_pressed():

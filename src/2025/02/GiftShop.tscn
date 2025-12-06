@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://yjkr8o73oto7"]
+
+[ext_resource type="Script" uid="uid://da7dvpe6qp2b5" path="res://src/2025/02/gift_shop.gd" id="1_hjhv1"]
+
+[node name="GiftShop" type="Node2D"]
+script = ExtResource("1_hjhv1")
