@@ -39,7 +39,8 @@ func _on_DayLoader_id_pressed(id:int):
 var scenes = [
 	preload("res://src/2025/01/SecretEntrance.tscn"),
 	preload("res://src/2025/02/GiftShop.tscn"),
-	preload("res://src/2025/03/Lobby.tscn")
+	preload("res://src/2025/03/Lobby.tscn"),
+	preload("res://src/2025/04/PrintingDepartment.tscn")
 	]
 
 func _on_PartOne_pressed():
