@@ -10,8 +10,8 @@ static func input(fname: String) -> Array:
 	var content = Utils.file_lines(str("res://src/2025/04/", fname, ".txt"))
 	return content
 
-func calc_part_one(data: PackedStringArray) -> int:
-	var reachable: int = 0
+func get_reachable_rolls(data: PackedStringArray) -> Array[Array]:
+	var to_return: Array[Array] = []
 	for r in range(data.size()):
 		for c in range(data[r].length()):
 			# do the 3x3 sampler
@@ -39,11 +39,24 @@ func calc_part_one(data: PackedStringArray) -> int:
 					sample_sum += 1
 			# check the results of the sampler
 			if sample_sum < 4:
-				reachable += 1
-	return reachable
+				to_return.append([r,c])
+	return to_return
+
+func calc_part_one(data: PackedStringArray) -> int:
+	return get_reachable_rolls(data).size()
 
 func calc_part_two(data: PackedStringArray) -> int:
-	return 0
+	var first: bool = true
+	var removed_total: int = 0
+	var removed_this_check: int = 0
+	while first || removed_this_check > 0:
+		first = false
+		var to_remove = get_reachable_rolls(data)
+		removed_this_check = to_remove.size()
+		removed_total += removed_this_check
+		for r in to_remove:
+			data[r[0]][r[1]] = '.'
+	return removed_total
 
 func run_part_one() -> int:
 	var data = input("input")

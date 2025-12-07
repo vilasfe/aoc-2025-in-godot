@@ -13,3 +13,9 @@ func test_calc_part_one() -> void:
 	var data = runner.invoke("input", "example")
 	var result = runner.invoke("calc_part_one", data)
 	assert_that(result).is_equal(13)
+
+func test_calc_part_two() -> void:
+	var runner = scene_runner("res://src/2025/04/PrintingDepartment.tscn")
+	var data = runner.invoke("input", "example")
+	var result = runner.invoke("calc_part_two", data)
+	assert_that(result).is_equal(43)
