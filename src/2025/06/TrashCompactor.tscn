@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccjs0gp732hrf"]
+
+[ext_resource type="Script" uid="uid://dyj13xaar8oaq" path="res://src/2025/06/trash_compactor.gd" id="1_okrgg"]
+
+[node name="TrashCompactor" type="Node2D"]
+script = ExtResource("1_okrgg")
