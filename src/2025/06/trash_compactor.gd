@@ -22,6 +22,31 @@ func transpose_input(data: PackedStringArray) -> Array[PackedStringArray]:
 			to_return[s].push_back(sp[s])
 	return to_return
 
+func ceph_transpose_input(data: PackedStringArray) -> Array[PackedStringArray]:
+	var to_return: Array[PackedStringArray] = []
+	
+	# Allocate array based on number of operators
+	var operators = data[data.size()-1].split(" ", false)
+	for _d in range(operators.size()):
+		to_return.push_back(PackedStringArray())
+
+	var group: int = 0
+	for c in range(data[0].length()):
+		var my_num: String = ""
+		for r in range(data.size() - 1):
+			if data[r][c] != " ":
+				my_num += data[r][c]
+		if my_num.is_empty():
+			group += 1
+		else:
+			to_return[group].push_back(my_num)
+
+	# gdscript really needs a zip operator
+	for o in range(operators.size()):
+		to_return[o].push_back(operators[o])
+
+	return to_return
+
 func reduce_row(row: PackedStringArray) -> int:
 	if row[row.size()-1] == "+":
 		return Array(row.slice(0,-1)).reduce(func(accum: int, e: String) -> int: return accum + e.to_int(), 0)
@@ -36,7 +61,8 @@ func calc_part_one(data: PackedStringArray) -> int:
 	return tr_data.reduce(func(accum: int, e: PackedStringArray) -> int: return accum + reduce_row(e), 0)
 
 func calc_part_two(data: PackedStringArray) -> int:
-	return 0
+	var tr_data = ceph_transpose_input(data)
+	return tr_data.reduce(func(accum: int, e: PackedStringArray) -> int: return accum + reduce_row(e), 0)
 
 func run_part_one() -> int:
 	var data = input("input")
