@@ -44,7 +44,8 @@ var scenes = [
 	preload("res://src/2025/05/Cafeteria.tscn"),
 	preload("res://src/2025/06/TrashCompactor.tscn"),
 	preload("res://src/2025/07/Laboratories.tscn"),
-	preload("res://src/2025/08/Playground.tscn")
+	preload("res://src/2025/08/Playground.tscn"),
+	preload("res://src/2025/09/MovieTheater.tscn")
 	]
 
 func _on_PartOne_pressed():
