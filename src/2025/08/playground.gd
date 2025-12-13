@@ -69,7 +69,7 @@ func calc_part_one(data: PackedStringArray, max_iterations: int) -> int:
 		# If both are found and not the same cluster then merge the clusters
 		elif src_idx != 0 && dest_idx != 0 && src_idx != dest_idx:
 			clusters[src_idx].append_array(clusters[dest_idx])
-			clusters[dest_idx].clear()
+			clusters.erase(dest_idx)
 		iterations += 1
 		if iterations >= max_iterations:
 			break
@@ -83,6 +83,50 @@ func calc_part_one(data: PackedStringArray, max_iterations: int) -> int:
 	return cluster_sizes[0] * cluster_sizes[1] * cluster_sizes[2]
 
 func calc_part_two(data: PackedStringArray) -> int:
+	# Transform the array of strings into an array of boxes
+	var boxes: Array = []
+	for d in data:
+		boxes.push_back(JunctionBox.new(d))
+	
+	# Enumerate all the edges and sort by least cost
+	var edges: Array = []
+	for b_src in range(boxes.size()):
+		for b_dest in range(b_src+1, boxes.size()):
+			edges.push_back(JBEdge.new(boxes[b_src], boxes[b_dest]))
+	edges.sort_custom(func(a: JBEdge, b: JBEdge) -> bool: return a.cost < b.cost)
+
+	# Build the clusters (circuits)
+	# use an int for the key and an array of boxes for the value
+	var clusters: Dictionary = {}
+	# let 0 be "not found"
+	var max_cluster_id: int = 1
+	for e in edges:
+		var src_idx: int = find_cluster_key_for(clusters, e.src)
+		var dest_idx: int = find_cluster_key_for(clusters, e.dest)
+		
+		# if neither index is found then add them both as a new cluster
+		if src_idx == 0 && dest_idx == 0:
+			clusters.set(max_cluster_id, [e.src, e.dest])
+			max_cluster_id += 1
+
+		# If the source is found but not dest then add dest to the src cluster
+		elif src_idx != 0 && dest_idx == 0:
+			clusters[src_idx].push_back(e.dest)
+			if clusters[src_idx].size() == data.size():
+				return e.src.v.x * e.dest.v.x
+		# Same thing for the reverse scenario
+		elif src_idx == 0 && dest_idx != 0:
+			clusters[dest_idx].push_back(e.src)
+			if clusters[dest_idx].size() == data.size():
+				return e.src.v.x * e.dest.v.x
+
+		# If both are found and not the same cluster then merge the clusters
+		elif src_idx != 0 && dest_idx != 0 && src_idx != dest_idx:
+			clusters[src_idx].append_array(clusters[dest_idx])
+			clusters.erase(dest_idx)
+			if clusters.size() == 1 && clusters[src_idx].size() == data.size():
+				return e.src.v.x * e.dest.v.x
+
 	return 0
 
 func run_part_one() -> int:
