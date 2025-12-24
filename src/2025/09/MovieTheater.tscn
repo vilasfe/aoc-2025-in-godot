@@ -2,5 +2,14 @@
 
 [ext_resource type="Script" uid="uid://rkpb08hye10p" path="res://src/2025/09/movie_theater.gd" id="1_816ff"]
 
-[node name="MovieTheater" type="Node2D"]
+[node name="MovieTheater" type="Node"]
 script = ExtResource("1_816ff")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.00069389754, 0.00069389766, 0.0006938976, 1)
