@@ -5,6 +5,7 @@ var day_label
 var day_container
 var part_one_result
 var part_two_result
+var gui_launcher
 
 var current
 
@@ -13,6 +14,7 @@ func _ready():
 	day_container = get_node("%DayContainer")
 	part_one_result = get_node("%PartOneResult")
 	part_two_result = get_node("%PartTwoResult")
+	gui_launcher = get_node("%GUI")
 
 	for p in scenes:
 		var tmp = p.instantiate()
@@ -34,6 +36,10 @@ func _on_DayLoader_id_pressed(id:int):
 
 	part_one_result.text = ""
 	part_two_result.text = ""
+	if current.has_method("launch_gui"):
+		gui_launcher.disabled = false
+	else:
+		gui_launcher.disabled = true
 
 # TODO: Change this from preload to autodiscovery
 var scenes = [
@@ -69,3 +75,12 @@ func _on_PartTwo_pressed():
 		part_two_result.text = str(result)
 	else:
 		print("No run_part_two method on current scene")
+
+
+func _on_gui_pressed() -> void:
+	var tree = get_tree()
+	var cur_scene = tree.get_current_scene()
+	current.reparent(tree.get_root())
+	tree.get_root().remove_child(cur_scene)
+	tree.set_current_scene(current)
+	current.launch_gui()

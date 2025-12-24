@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnwl055cfqn3i"]
+
+[ext_resource type="Script" uid="uid://b524xqlr7007n" path="res://src/2025/07/light_segment.gd" id="1_3wskm"]
+
+[node name="LightSegment" type="Node2D"]
+script = ExtResource("1_3wskm")
+
+[node name="Background" type="ColorRect" parent="."]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.47592735, 0.47592735, 0.4759273, 1)
+
+[node name="Timelines" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1.6530219e-05, 1.6530223e-05, 1.6530223e-05, 1)
+horizontal_alignment = 1
+vertical_alignment = 1

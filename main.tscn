@@ -43,6 +43,12 @@ text = "Run Part One"
 layout_mode = 2
 text = "Run Part Two"
 
+[node name="GUI" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Run Daily GUI"
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -84,4 +90,5 @@ layout_mode = 2
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/DaySelector" to="." method="_on_DaySelector_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PartOne" to="." method="_on_PartOne_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PartTwo" to="." method="_on_PartTwo_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/GUI" to="." method="_on_gui_pressed"]
 [connection signal="id_pressed" from="DayLoader" to="." method="_on_DayLoader_id_pressed"]

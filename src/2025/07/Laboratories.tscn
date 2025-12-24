@@ -2,5 +2,14 @@
 
 [ext_resource type="Script" uid="uid://d2mbh2ddnv4vm" path="res://src/2025/07/laboratories.gd" id="1_e2pqk"]
 
-[node name="Laboratories" type="Node2D"]
+[node name="Laboratories" type="Node"]
 script = ExtResource("1_e2pqk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1.6530219e-05, 1.6530223e-05, 1.6530223e-05, 1)
