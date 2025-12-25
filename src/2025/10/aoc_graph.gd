@@ -2,23 +2,13 @@ extends Node
 
 class_name AocGraph
 
-@onready var nodes: Array[AocGraphNode] = []
+@onready var nodes: Dictionary[String,AocGraphNode] = {}
 
-# node_index: Array[int] of neighbor indices
-@onready var edges: Dictionary = {}
-
-func _init(size: int) -> void:
-	nodes.resize(size)
-	for n in size:
-		edges[n] = []
-
-func connect_nodes(src: int, dest: int) -> void:
-	if ! edges[src].has(dest):
-		edges[src].append(dest)
-		edges[src].sort()
-	if ! edges[dest].has(src):
-		edges[dest].append(src)
-		edges[dest].sort()
+func connect_nodes(src: String, dest: String) -> void:
+	if ! nodes.get_or_add(src, AocGraphNode.new()).neighbors.has(dest):
+		nodes[src].neighbors.append(dest)
+	if ! nodes.get_or_add(dest, AocGraphNode.new()).neighbors.has(src):
+		nodes[dest].neighbors.append(src)
 
 enum VisitColors {
 	OPEN,
@@ -26,22 +16,22 @@ enum VisitColors {
 	CLOSED
 }
 
-# returns array of parents
-func bfs(src: int) -> Array[int]:
-	var visited: Array[VisitColors] = []
-	visited.resize(nodes.size())
-	visited.fill(VisitColors.OPEN)
-	var parent: Array[int] = []
-	parent.resize(nodes.size())
-	parent.fill(-1)
-	var queue: Array[int] = []
+# returns map of parents
+func bfs(src: String) -> Dictionary[String,String]:
+	var visited: Dictionary[String,VisitColors] = {}
+	for n in nodes.keys():
+		visited[n] = VisitColors.OPEN
+	var parent: Dictionary[String,String] = {}
+	for n in nodes.keys():
+		parent[n] = ""
+	var queue: Array[String] = []
 
 	queue.push_back(src)
 	visited[src] = VisitColors.QUEUED
 	while ! queue.is_empty():
 		var current = queue.pop_front()
 		visited[current] = VisitColors.CLOSED
-		for n in edges[current]:
+		for n in nodes[current].neighbors:
 			if visited[n] == VisitColors.OPEN:
 				queue.push_back(n)
 				parent[n] = current
@@ -49,10 +39,10 @@ func bfs(src: int) -> Array[int]:
 
 	return parent
 
-func reconstruct_path(parent_map: Array[int], target_node: int) -> Array[int]:
-	var path: Array[int] = []
+func reconstruct_path(parent_map: Dictionary[String,String], target_node: String) -> PackedStringArray:
+	var path: Array[String] = []
 	var current = target_node
-	while current != -1 && path.size() < parent_map.size():
+	while !current.is_empty() && path.size() < parent_map.size():
 		path.push_back(current)
 		current = parent_map[current]
 	path.reverse()
