@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c61gxavldqtan"]
+
+[ext_resource type="Script" uid="uid://cymh6m1tnoy8n" path="res://src/2025/11/reactor.gd" id="1_6md21"]
+
+[node name="Reactor" type="Node"]
+script = ExtResource("1_6md21")
