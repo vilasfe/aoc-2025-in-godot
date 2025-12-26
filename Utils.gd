@@ -17,6 +17,21 @@ static func file_lines(fpath) -> PackedStringArray:
 
 	return content.split("\n", false)
 
+static func array_to_string(arr: Array) -> String:
+	return arr.reduce(func(accum: String, e: int) -> String:
+			if accum.is_empty():
+				return accum + str(e)
+			else:
+				return accum + "," + str(e)
+			, "")
+
+static func find_all_occurrences(array_to_search: Array, value_to_find: Variant) -> Array[int]:
+	var found_indices: Array[int] = []
+	for i in range(array_to_search.size()):
+		if array_to_search[i] == value_to_find:
+			found_indices.append(i)
+	return found_indices
+
 # Sorts an array of Vector2 points in clockwise order
 static func sort_points_clockwise(points_array: PackedVector2Array) -> PackedVector2Array:
 	if points_array.size() <= 1:

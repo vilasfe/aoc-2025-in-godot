@@ -5,9 +5,18 @@ class_name AocGraph
 @onready var nodes: Dictionary[String,AocGraphNode] = {}
 
 func connect_nodes(src: String, dest: String) -> void:
-	if ! nodes.get_or_add(src, AocGraphNode.new()).neighbors.has(dest):
+	if ! nodes.has(src):
+		var tmp: AocGraphNode = AocGraphNode.new()
+		add_child(tmp)
+		nodes.set(src, tmp)
+	if ! nodes.has(dest):
+		var tmp: AocGraphNode = AocGraphNode.new()
+		add_child(tmp)
+		nodes.set(dest, tmp)
+	
+	if ! nodes[src].neighbors.has(dest):
 		nodes[src].neighbors.append(dest)
-	if ! nodes.get_or_add(dest, AocGraphNode.new()).neighbors.has(src):
+	if ! nodes[dest].neighbors.has(src):
 		nodes[dest].neighbors.append(src)
 
 enum VisitColors {
