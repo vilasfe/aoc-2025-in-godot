@@ -110,3 +110,34 @@ func count_paths(src: String, dest: String) -> int:
 		for neighbor in nodes[node].neighbors:
 			ways[neighbor] += ways[node]
 	return ways[dest]
+
+# Warning, this is O(2^n) in number of nodes in the graph
+func enumerate_paths(src: String, dest: String, must_visit: Array[String]) -> Array[PackedStringArray]:
+	var paths: Array[PackedStringArray] = []
+	# Use a stack of paths rather than nodes
+	# for a DFS-like search but with history
+	var stack: Array[Array] = []
+
+	stack.push_front([src])
+	while !stack.is_empty():
+		var current_path = stack.pop_front()
+		var current_node = current_path.back()
+
+		# If the destination is reached, add the path to the results
+		if current_node == dest:
+			if must_visit.is_empty():
+				paths.push_back(PackedStringArray(current_path))
+			else:
+				var add: bool = must_visit.all(func(e: String) -> bool: return current_path.has(e))
+				if add:
+					paths.push_back(PackedStringArray(current_path))
+			continue
+
+		# Add neighbors to the current path and push new paths into the stack
+		# Be sure to check that we are not pushing a cycle into the stack
+		for neighbor in nodes[current_node].neighbors:
+			if ! current_path.has(neighbor):
+				var new_path = current_path.duplicate()
+				new_path.push_back(neighbor)
+				stack.push_front(new_path)
+	return paths
