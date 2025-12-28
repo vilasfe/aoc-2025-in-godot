@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbhjg2cwdvv36"]
+
+[ext_resource type="Script" uid="uid://cqw6bds0k1qpv" path="res://src/2025/12/christmas_tree_farm.gd" id="1_6m780"]
+
+[node name="ChristmasTreeFarm" type="Node"]
+script = ExtResource("1_6m780")

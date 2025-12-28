@@ -32,6 +32,12 @@ static func find_all_occurrences(array_to_search: Array, value_to_find: Variant)
 			found_indices.append(i)
 	return found_indices
 
+static func array_dot_product(a1: Array, a2: Array):
+	var total = a1[0] * a2[0]
+	for i in range(1, a1.size()):
+		total += a1[i] * a2[i]
+	return total
+
 # Sorts an array of Vector2 points in clockwise order
 static func sort_points_clockwise(points_array: PackedVector2Array) -> PackedVector2Array:
 	if points_array.size() <= 1:
